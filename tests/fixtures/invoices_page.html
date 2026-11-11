@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html><head><title>moj.tauron.pl</title></head><body><main>
+<script>
+  var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+      sURLVariables = sPageURL.split('&'),
+      sParameterName,
+      i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+      sParameterName = sURLVariables[i].split('=');
+      if (sParameterName[0] === sParam) {
+        return sParameterName[1] === undefined ? true : sParameterName[1];
+      }
+    }
+
+    return null;
+  };
+    DataTableLayout.setInactiveMessage('Płatność możliwa po opłaceniu wcześniejszych płatności.');
+
+  var isInitExpanded = false;
+  var currentItemCount = 0;
+  var totalItems = null;
+  var serializedViewModel = {"SearchName":null,"SearchType":null,"BiezaceSaldoEtykieta":"Bieżące","BrakFakturKomunikat":"Brak faktur","BrakFakturLink":{"LinkDescription":"Sprawdź historię","Ebok10Url":"","TargetWindow":"_self","Url":"/Home/Pages/archiwum dokumentow","FormattedUrl":"/Home/Pages/archiwum dokumentow"},"DataWystawieniaEtykieta":"Data wystawienia","InformacjeDodatkoweEtykieta":"Informacje dodatkowe","KwotaDoZaplatyEtykieta":"Kwota do zapłaty","LacznieSaldoEtykieta":"Łącznie","ListaFakturLink1":{"LinkDescription":"Historia i podgląd faktur","Ebok10Url":"","TargetWindow":"_self","Url":"/Home/Pages/Archiwum dokumentow","FormattedUrl":"/Home/Pages/Archiwum dokumentow"},"ListaFakturLink2":{"LinkDescription":"Numery kont do wpłat","Ebok10Url":"","TargetWindow":"_self","Url":"/Home/Pages/numery-kont","FormattedUrl":"/Home/Pages/numery-kont"},"ListaFakturLink3":{"LinkDescription":"Historia zużycia energii","Ebok10Url":"","TargetWindow":"_self","Url":"/Home/Pages/historia-odczytow-licznika-prad","FormattedUrl":"/Home/Pages/historia-odczytow-licznika-prad"},"SaldoEtykieta":"Saldo","SumaWszystkichEtykieta":"Suma","SzczegiolySaldaEtykieta":"Zobacz szczegóły salda","NotaOdsetkowaSaldoEtkieta":"Nota odsetkowa","TerminPlatnosciEtykieta":"Termin płatności","NrDokumentuEtykieta":"Numer dokumentu","TypDokumentuEtykieta":"Typ dokumentu","PodgladFakturyLink":{"Anchor":"","Class":"","Text":"","Query":"","Title":"","Url":"/podgladFaktury/id/","Target":"","TargetId":"00000000-0000-0000-0000-000000000000","Type":2,"Style":""},"PrzeterminowaneSaldoEtykieta":"Przeterminowane","PrzyciskZaplacEtykieta":"Zapłać","RazemSaldoEtykieta":"Razem","ListaFakturNaglowek":"Faktury i płatności","NaleznoscSaldoEtykieta":"Należność","EdycjaIkonaSrc":"/-/media/Images/Ebok/Icons/iconset_func_edit.ashx","GazIkonaSrc":"/-/media/Images/Ebok/Icons/iconset_bfbfbf_gas.ashx","InfoIkonaSrc":"/-/media/Images/Ebok/Icons/iconset_344290_info.ashx","InneIkonaSrc":"/-/media/Images/Ebok/Icons/EDISONDA_TAURON_eBOK_iconset_03.ashx","PradIkonaSrc":"/-/media/Images/Ebok/Icons/iconset_bfbfbf_cabel.ashx","RotacjaIkonaSrc":"/-/media/Images/Ebok/Icons/EDISONDA_TAURON_eBOK_iconset_05.ashx","ZaladujWiecejIkonaSrc":"/-/media/Images/Ebok/Icons/icon-more.ashx","EBok1_0Link":"https://logowanie.tauron.pl/extranets/15/connect?p=/external/system/{system_nazwa}/client/{kontrahent_id}","ListCount":1,"WyszukiwarkaTypUmowy":"Typ umowy","WyszukiwarkaTekst":"Podaj ulicę, miejscowość lub nazwę własną","PrzyciskSzukajEtykieta":"Szukaj","NazwaPunktuEdytujEtykieta":"Zmień własną nazwę","NazwaPunktuPomoc":"","PlatnoscZablokowanaKomunikat":"Płatność możliwa po opłaceniu wcześniejszych płatności.","PopUpZListaPPEtykieta":"Sprawdź punkty poboru","NrEwidencyjny":"Numer ewidencyjny","Nadplata":"Nadpłata","NadplataLink":null,"BladPobraniaDokumentu":"Przepraszamy, w tej chwili nie możemy pobrać dokumentu. Spróbuj ponownie później.","HeaderTag":"h2","PobierzZestawienieEtykieta":"Zestawienie z faktury","PobierzZestawienieLabel":"Eksportuj zestawienie","PobierzZestawienieBlad":"Nie można pobrać pliku.","PobierzFakturyLabel":"Eksportuj listę faktur","PobierzFakturyBlad":"Przepraszamy, nie mozna wygenerować listy faktur.","HarmonogramRatNaglowek":"Twój harmonogram rat","HarmonogramBlad":"Przepraszamy, nie można pobrać harmonogramu rat. Spróbuj ponownie później.","HarmonogramRatNumerRaty":"Numer raty","HarmonogramRatNumerDoc":"Numer powiązanego dokumentu","HarmonogramRatTermin":"Termin płatności","HarmonogramRatKwota":"Kwota raty","HarmonogramRatStatus":"Status","DataSourceId":"614e0b1a-d41f-4a03-957d-1cb7cfb1abf3","WyszukiwanieDataOd":"Wybierz zakres wystawienia faktur od","WyszukiwanieDataDo":"do","WyszukiwanieTypDok":"Wybierz typ dokumentu","WyszukiwanieNumerDok":"Podaj numer dokumentu","WyszukiwanieNumerPP":"Podaj numer Punktu poboru","WyszukiwanieWyczysc":"Wyczyść filtr","WyszukiwanieSzukaj":"Szukaj","WyszukiwanieBlad":"Wystapił błąd podczas wyszukiwania dokumentów. Spróbuj ponownie później.","WyszukiwaniePustaLista":"Brak dokumentów dla zadanych filtrów.","Segment":1,"IsBusiness":false};
+  var searchTerm = getUrlParameter("searchTerm");
+  var mediumType = getUrlParameter("mediumType");
+
+  function changeName(button) {
+    var input = $(button).closest("div").find("input");
+    console.log(input.data("agreement-id"));
+
+    $.ajax({
+      url: "/api/sitecore/EbokInvoiceList/SetName",
+      data: {
+        contractorId: input.data("agreement-id"),
+        newName: input.val()
+      },
+      cache: false,
+      type: "POST",
+      success: function (data) {
+        $(button).closest(".header-container").find("h3").text(data);
+        $(button).closest('.msp-item').next().next().next().children(".ebok-pop-up").find('h3').text(data);
+
+      },
+      complete: function () {
+        $(button).parent().find(".btn-no").click();
+      },
+      error: function() {
+      }
+    });
+  }
+
+  function loadMoreItems(asyncPar) {
+      if (asyncPar === undefined) {
+      asyncPar = true;
+    }
+    if (totalItems != null && currentItemCount >= totalItems) {
+      return;
+      }
+    $.ajax({
+      url: "/api/sitecore/EbokInvoiceList/LoadMoreInvoicesProducts?sid=T18&amp;pp=12345678",
+      async: asyncPar,
+      data: {
+        startingIndex: currentItemCount,
+        searchTerm: searchTerm,
+        PickupMediumType: mediumType,
+        parentViewModel: serializedViewModel
+      },
+      timeout: 10000,
+      cache: false,
+      type: "POST",
+      success: function (data) {
+        $("#itemList").append(data.ResultHtml);
+        totalItems = data.TotalCount;
+        currentItemCount += data.ReturnedCount;
+        dataTableLayout.initAutoDownload();
+        $('.msp-item .btn-msp-popup').off('click').on('click', function () {
+          $(this).parents('.msp-item').next().next().next().children(".ebok-pop-up").toggle();
+        });
+        $('#itemList .popup-close').off('click').on('click', function () {
+          $(this).closest('.ebok-pop-up').hide();
+        });
+
+        var ajaxModelCount = totalItems - currentItemCount;
+        if (currentItemCount < 2) {
+          $("#payAllInvoices").hide();
+        }
+        if (ajaxModelCount <= 0) {
+          $(".table-layout-bottom").hide();
+          $(".table-layout.table-placeholder").addClass("last-visible-row");
+        }
+        else {
+          $(".table-layout-bottom").show();
+          $(".table-layout.table-placeholder").removeClass("last-visible-row");
+        }
+        SetSum(false);
+        dataTableLayout.updateControlls();
+        if (!isInitExpanded) {
+          jQuery("[data-expand-init='true']").click();
+          isInitExpanded = true;
+        }
+        for (var e = document.querySelectorAll(".installment-schedule-wrapper"), t = 0; t < e.length; t++)
+          new InstallmentScheduleComponent(e[t])
+
+        console.error("test");
+        for (var e = document.querySelectorAll("[data-invoices]"), t = 0; t < e.length; t++) {
+          new InvoicesFiltersComponent(e[t]);
+        }
+        new Datepicker();
+        new Spinner();
+      },
+      complete: function() {
+      },
+      error: function () {
+        alert("Problem z pobraniem listy faktur. Proszę spróbować później");
+      }
+    });
+  }
+
+  $("#loadMore").on("click", function (e) {
+    e.preventDefault();
+    loadMoreItems();
+  });
+  $("#searchEbok").on("click", function (e) {
+
+    searchTerm = $("#SearchName").val();
+    mediumType = $("#SearchType").val();
+    currentItemCount = 0;
+    $.ajax({
+      url: "/api/sitecore/EbokInvoiceList/LoadMoreInvoicesProducts?sid=T18&amp;pp=12345678",
+      data: {
+        startingIndex: currentItemCount,
+        SearchTerm: searchTerm,
+        PickupMediumType: mediumType,
+        parentViewModel: serializedViewModel
+      },
+      cache: false,
+      type: "POST",
+      success: function (data) {
+        $("#itemList").html(data.ResultHtml);
+        totalItems = data.TotalCount;
+        currentItemCount = data.ReturnedCount;
+        dataTableLayout.initAutoDownload();
+        $('.msp-item .btn-msp-popup').off('click').on('click', function () {
+          $(this).parents('.msp-item').next().children(".ebok-pop-up").toggle();
+        });
+
+        var ajaxModelCount = totalItems - currentItemCount;
+        if (ajaxModelCount <= 0) {
+          $(".table-layout-bottom").hide();
+        }
+        else {
+          $(".table-layout-bottom").show();
+        }
+        for (var e = document.querySelectorAll(".installment-schedule-wrapper"), t = 0; t < e.length; t++)
+          new InstallmentScheduleComponent(e[t])
+
+        console.error("test");
+        for (var e = document.querySelectorAll("[data-invoices]"), t = 0; t < e.length; t++) {
+          new InvoicesFiltersComponent(e[t]);
+        }
+        new Datepicker();
+        new Spinner();
+      },
+      complete: function() {
+      },
+      error: function() {
+      }
+    });
+  });
+
+  function SetSum(asyncPar) {
+    var idArray = [];
+    $("input:checked[data-charge-id]").each(function () {
+      var item = {
+        chargeId : $(this).attr('data-charge-id'),
+        chargeValue : $(this).attr('data-charge-value')
+      }
+      idArray.push(item);
+    });
+    idArray = unique(idArray);
+    var res = sum(idArray);
+    dataTableLayout.updateSumControll($("#ebok-charges-all-sum"), res);
+
+    $(".table-inside").each(function () {
+      var sumItem = $(".sum-wrapper .amount", $(this)).first();
+      var idArray = [];
+      $("input[data-charge-id]:checked", $(this).children(".table-wrapper").first()).each(function () {
+        var item = {
+          chargeId: $(this).attr('data-charge-id'),
+          chargeValue: $(this).attr('data-charge-value')
+        }
+        idArray.push(item);
+      });
+      idArray = unique(idArray);
+      var res = sum(idArray);
+      dataTableLayout.updateSumControll(sumItem, res);
+    });
+  }
+
+  function unique(list) {
+    var result = [];
+    $.each(list, function (i, e) {
+      if ($.inArray(e, result) == -1) result.push(e);
+    });
+    return result;
+  }
+
+  function sum(list) {
+    var total = parseFloat(0, 10);
+    $.each(list, function () {
+      total += parseFloat(this.chargeValue.replace(',', '.'));
+    });
+
+    return total.toFixed(2).replace(',', '.');
+  }
+
+
+  $("#ebokPayAllChecked").on("click", function (e) {
+
+    var idArray = [];
+    $("input[data-charge-id]:checked").each(function () {
+      idArray.push($(this).attr('data-charge-id'));
+    });
+    var data = "";
+    idArray.forEach(function (e) {
+      data += "ids=" + e + "&";
+    });
+    data = data.trim("&");
+    this.href = this.href.replace("ids=ebokIdsToReplace", data);
+  });
+
+  $("main").on('click', '.ebok-button-pay-all-agreement', function (e) {
+
+    var idArray = [];
+    $("input[data-charge-id]:checked", $(this).closest(".table-inside").children(".table-wrapper").first()).each(function () {
+      idArray.push($(this).attr('data-charge-id'));
+    });
+    var data = "";
+    idArray.forEach(function (e) {
+      data += "ids=" + e + "&";
+    });
+    data = data.trim("&");
+    this.href = this.href.replace("ids=ebokIdsToReplace", data);
+  });
+
+  $("main").on("click", ".btn-change-name", function (e) {
+    changeName(this);
+  });
+
+  $("main").on('click', '.ebok-button-pay-agreement', function (e) {
+
+    var idArray = [];
+    $("input[data-charge-id]", $(this).closest(".row")).each(function () {
+      idArray.push($(this).attr('data-charge-id'));
+    });
+    var data = "";
+    idArray.forEach(function (e) {
+      data += "ids=" + e + "&";
+    });
+    data = data.trim("&");
+    this.href = this.href.replace("ids=ebokIdsToReplace", data);
+  });
+
+
+
+  loadMoreItems("false");
+  DataTableLayout.onChange(SetSum);
+  InvoicesFiltersComponent.onSearchCompleted(function (root, data, isError) {
+    console.log("Invoices search finished:", root, "error?", isError);
+    dataTableLayout.initAutoDownload();
+    SetSum(false);
+    dataTableLayout.updateControlls();
+  });
+</script>
+</main></body></html>

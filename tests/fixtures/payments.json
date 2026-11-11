@@ -1,0 +1,72 @@
+{
+ "Documents": [
+  {
+   "Amount": 445.06,
+   "Date": "2026-10-19T00:00:00",
+   "DateFormatted": "19.10.2026",
+   "Type": "Wpłata",
+   "CustomerNumber": 12345678,
+   "DocNumber": "KP/RAP/TM_PKO/26/000830/05/000123",
+   "Details": [
+    {
+     "DocSignature": "E/TM2/AB345678/0003/26/2",
+     "Address": "UL.TESTOWA 1/2 00-001 WARSZAWA",
+     "PaymentDate": "2026-09-21T00:00:00",
+     "PaymentAmount": 147.05,
+     "PaymentSettlementAmount": 147.05
+    },
+    {
+     "DocSignature": "E/TM2/AB345678/0003/26/3",
+     "Address": "UL.TESTOWA 1/2 00-001 WARSZAWA",
+     "PaymentDate": "2026-10-20T00:00:00",
+     "PaymentAmount": 150.96,
+     "PaymentSettlementAmount": 150.96
+    },
+    {
+     "DocSignature": "E/TM2/AB345678/0003/26/4",
+     "Address": "UL.TESTOWA 1/2 00-001 WARSZAWA",
+     "PaymentDate": "2026-11-20T00:00:00",
+     "PaymentAmount": 147.05,
+     "PaymentSettlementAmount": 147.05
+    }
+   ],
+   "PaymentDateSystem": "2026-10-19T00:00:00",
+   "PaymentDateSystemFormatted": "19.10.2026",
+   "Url": "/Home/Pages/rozdysponowanie-wplat?clientNr=12345678&&docNumber=KP/RAP/TM_PKO/26/000830/05/000123&&checkSum=A67CBF194EC47DD3D0B79596CDE85BDC60F1A791B67B2886728FCFE3469D0E1C",
+   "AmountText": "445,06 zł"
+  },
+  {
+   "Amount": 304.0,
+   "Date": "2026-08-31T00:00:00",
+   "DateFormatted": "31.08.2026",
+   "Type": "Wpłata",
+   "CustomerNumber": 12345678,
+   "DocNumber": "KP/RAP/TM_PKO/26/000689/05/002267",
+   "Details": [
+    {
+     "DocSignature": "E/TM2/AB345678/0003/26",
+     "Address": "UL.TESTOWA 1/2 00-001 WARSZAWA",
+     "PaymentDate": "2026-08-20T00:00:00",
+     "PaymentAmount": 49.8,
+     "PaymentSettlementAmount": 49.8
+    },
+    {
+     "DocSignature": "E/TM2/AB345678/0003/26/1",
+     "Address": "UL.TESTOWA 1/2 00-001 WARSZAWA",
+     "PaymentDate": "2026-08-20T00:00:00",
+     "PaymentAmount": 254.2,
+     "PaymentSettlementAmount": 254.2
+    }
+   ],
+   "PaymentDateSystem": "2026-08-31T00:00:00",
+   "PaymentDateSystemFormatted": "31.08.2026",
+   "Url": "/Home/Pages/rozdysponowanie-wplat?clientNr=12345678&&docNumber=KP/RAP/TM_PKO/26/000689/05/002267&&checkSum=69199D06C93E539CBBBA2CEB62FA8DFEEEB3AD761FD74CFD103233827AD443F5",
+   "AmountText": "304,00 zł"
+  }
+ ],
+ "StatusEnum": 0,
+ "Status": "OK",
+ "RangeFrom": 1,
+ "RangeTo": 2,
+ "TotalNumber": 2
+}

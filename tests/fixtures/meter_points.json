@@ -1,0 +1,80 @@
+[
+ {
+  "TariffGroup": "G11",
+  "ContractedPower": 5,
+  "Number": "590000000000000001",
+  "MeterPointName": "KOWALSKI JAN",
+  "MeterNumber": "590000000000000001",
+  "Address": {
+   "City": "WARSZAWA",
+   "ZipCode": "00-001",
+   "AddressPrefix": "",
+   "StreetName": "Ul. TESTOWA",
+   "HouseNumber": "1",
+   "FlatNumber": "2",
+   "PlotNumber": "",
+   "CityPart": "00-001 WARSZAWA",
+   "StreetPart": "Ul. TESTOWA",
+   "NumberPart": "1/2",
+   "PlotPart": null,
+   "FullAddress": "00-001 WARSZAWA, Ul. TESTOWA, 1/2"
+  },
+  "Readings": [
+   {
+    "LastReadingDate": "02.01.2025",
+    "Type": 2,
+    "Details": [
+     {
+      "Zone": "AggregatedZone",
+      "Consumption": 737,
+      "ConsumptionIndication": 21633
+     }
+    ]
+   },
+   {
+    "LastReadingDate": "02.04.2025",
+    "Type": 2,
+    "Details": [
+     {
+      "Zone": "AggregatedZone",
+      "Consumption": 463,
+      "ConsumptionIndication": 22096
+     }
+    ]
+   },
+   {
+    "LastReadingDate": "09.07.2025",
+    "Type": 1,
+    "Details": [
+     {
+      "Zone": "AggregatedZone",
+      "Consumption": 338,
+      "ConsumptionIndication": 338
+     }
+    ]
+   },
+   {
+    "LastReadingDate": "09.01.2026",
+    "Type": 1,
+    "Details": [
+     {
+      "Zone": "AggregatedZone",
+      "Consumption": 734,
+      "ConsumptionIndication": 1072
+     }
+    ]
+   },
+   {
+    "LastReadingDate": "04.07.2026",
+    "Type": 1,
+    "Details": [
+     {
+      "Zone": "AggregatedZone",
+      "Consumption": 746,
+      "ConsumptionIndication": 1818
+     }
+    ]
+   }
+  ]
+ }
+]
