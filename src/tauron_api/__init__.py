@@ -43,7 +43,7 @@ from .models import (
 )
 
 try:
-    __version__ = version("tauron-ebok")
+    __version__ = version("tauron-api")
 except PackageNotFoundError:  # pragma: no cover - running from a source tree
     __version__ = "0.0.0"
 

@@ -1,7 +1,7 @@
-"""``tauron-ebok`` command line interface. Prints JSON to stdout; files are written to disk.
+"""``tauron-api`` command line interface. Prints JSON to stdout; files are written to disk.
 
 Credentials come from ``TAURON_USER`` / ``TAURON_PASS`` (environment or a ``.env`` file in
-the current directory). The session is cached in ``~/.cache/tauron-ebok/session.json``.
+the current directory). The session is cached in ``~/.cache/tauron-api/session.json``.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ from .models import (
     to_jsonable,
 )
 
-DEFAULT_SESSION_FILE = Path("~/.cache/tauron-ebok/session.json")
+DEFAULT_SESSION_FILE = Path("~/.cache/tauron-api/session.json")
 
 
 def load_dotenv(path: Path) -> None:
@@ -58,7 +58,7 @@ def _save(file: DownloadedFile, out: str) -> Path:
 
 def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(
-        prog="tauron-ebok", description="Unofficial TAURON eBOK (moj.tauron.pl) client"
+        prog="tauron-api", description="Unofficial TAURON eBOK (moj.tauron.pl) client"
     )
     ap.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     ap.add_argument("--payer", help="payer number (needed only when the login has several payers)")

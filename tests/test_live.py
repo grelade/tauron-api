@@ -12,8 +12,8 @@ from pathlib import Path
 
 import pytest
 
-from tauron_ebok import TauronClient
-from tauron_ebok.cli import load_dotenv
+from tauron_api import TauronClient
+from tauron_api.cli import load_dotenv
 
 load_dotenv(Path(__file__).parents[1] / ".env")
 

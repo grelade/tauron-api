@@ -11,7 +11,7 @@ import pytest
 import responses
 from responses import matchers
 
-from tauron_ebok import (
+from tauron_api import (
     ApiError,
     AuthenticationError,
     DocumentKind,
@@ -21,7 +21,7 @@ from tauron_ebok import (
     TauronClient,
     TauronError,
 )
-from tauron_ebok.client import _months_ago
+from tauron_api.client import _months_ago
 
 from .conftest import BASE, PAYER, PPE, add_html, add_json, fixture_json, fixture_text
 

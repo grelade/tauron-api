@@ -4,7 +4,7 @@ Guidance for coding agents working on this repository.
 
 ## What this is
 
-`tauron-ebok`: an unofficial Python SDK + CLI for TAURON eBOK (https://moj.tauron.pl). The
+`tauron-api`: an unofficial Python SDK + CLI for TAURON eBOK (https://moj.tauron.pl). The
 portal has no public API; the SDK logs in through Keycloak and scrapes server-rendered
 Sitecore pages plus the jQuery AJAX endpoints under `/api/sitecore/{Controller}/{Action}`.
 **API.md is the endpoint reference**: read it before touching the client, and update it
@@ -13,12 +13,12 @@ whenever you learn something new about the site.
 ## Layout
 
 ```
-src/tauron_ebok/
+src/tauron_api/
   client.py      TauronClient: login, session/cookie handling, one method per feature (I/O only)
   parsers.py     pure functions HTML/JSON -> models; all scraping selectors live here
   models.py      dataclasses (Decimal money, date dates), enums for API filter values, to_jsonable()
   exceptions.py  TauronError > AuthenticationError | ApiError | ParseError | PayerNotFoundError
-  cli.py         `tauron-ebok` argparse CLI, JSON on stdout
+  cli.py         `tauron-api` argparse CLI, JSON on stdout
 tests/
   fixtures/      ANONYMISED captures of real pages / API responses
   test_parsers.py  parsers against fixtures
@@ -35,7 +35,7 @@ uv run pytest                             # offline test suite, must stay green
 uv run ruff check . && uv run ruff format --check .
 uv run mypy                               # strict mode on src/
 TAURON_LIVE=1 uv run pytest -m live       # needs TAURON_USER / TAURON_PASS (env or .env)
-uv run tauron-ebok --help                 # CLI
+uv run tauron-api --help                 # CLI
 ```
 
 Add dependencies with `uv add` / `uv add --dev` so `uv.lock` stays in sync. CI runs ruff,

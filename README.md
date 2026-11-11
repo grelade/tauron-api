@@ -1,4 +1,4 @@
-# tauron-ebok
+# tauron-api
 
 Unofficial Python SDK and command-line client for **TAURON eBOK**
 ([moj.tauron.pl](https://moj.tauron.pl)), the customer portal of the Polish energy company TAURON.
@@ -19,7 +19,7 @@ It logs in with your eBOK credentials and gives typed access to everything the p
 ## Install
 
 ```bash
-uv add git+https://github.com/grelade/tauron-ebok      # or: pip install git+https://…
+uv add git+https://github.com/grelade/tauron-api      # or: pip install git+https://…
 ```
 
 Requires Python 3.10+.
@@ -28,7 +28,7 @@ Requires Python 3.10+.
 
 ```bash
 export TAURON_USER=you@example.com TAURON_PASS='…'     # or put them in ./.env
-uvx --from git+https://github.com/grelade/tauron-ebok tauron-ebok balance
+uvx --from git+https://github.com/grelade/tauron-api tauron-api balance
 ```
 
 | Command | Output |
@@ -46,23 +46,23 @@ uvx --from git+https://github.com/grelade/tauron-ebok tauron-ebok balance
 
 Output is JSON (amounts are strings to keep `Decimal` precision). Global options: `--payer N`
 (needed only for logins with several payers) and `--session-file PATH` (default
-`~/.cache/tauron-ebok/session.json`; cookies are reused so repeated runs don't log in again).
+`~/.cache/tauron-api/session.json`; cookies are reused so repeated runs don't log in again).
 
 ## Library
 
 ```python
 from datetime import date
-from tauron_ebok import TauronClient
+from tauron_api import TauronClient
 
-with TauronClient("you@example.com", "secret", session_file="~/.cache/tauron-ebok/session.json") as c:
+with TauronClient("you@example.com", "secret", session_file="~/.cache/tauron-api/session.json") as c:
     for payer in c.get_payers():
         print(payer.number, payer.address, payer.next_payment_amount, payer.next_payment_due)
 
-    balance = c.get_balance()                     # payer= can be omitted for single-payer logins
+    balance = c.get_balance()  # payer= can be omitted for single-payer logins
     print(balance.total, balance.overdue.total if balance.overdue else 0)
 
     for doc in c.iter_documents(date_from=date(2025, 1, 1)):
-        pdf = c.download_document(doc)            # DownloadedFile(filename, content_type, content)
+        pdf = c.download_document(doc)  # DownloadedFile(filename, content_type, content)
         open(pdf.filename, "wb").write(pdf.content)
 
     for point in c.get_meter_readings():
@@ -79,7 +79,7 @@ All methods: `get_payers`, `get_payer`, `get_balances`, `get_balance`, `get_open
 `get_monthly_consumption`, `export_meter_readings`; account changes: `set_payer_name`,
 `archive_messages`, `set_email_notifications`; session: `login`, `logout`, `save_session`.
 
-Errors derive from `tauron_ebok.TauronError` (`AuthenticationError`, `ApiError`, `ParseError`,
+Errors derive from `tauron_api.TauronError` (`AuthenticationError`, `ApiError`, `ParseError`,
 `PayerNotFoundError`).
 
 ## Development

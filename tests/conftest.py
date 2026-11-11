@@ -11,7 +11,7 @@ from typing import Any
 import pytest
 import responses
 
-from tauron_ebok import TauronClient
+from tauron_api import TauronClient
 
 FIXTURES = Path(__file__).parent / "fixtures"
 BASE = "https://moj.tauron.pl"

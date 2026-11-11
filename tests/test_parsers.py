@@ -5,9 +5,9 @@ from decimal import Decimal
 
 import pytest
 
-from tauron_ebok import parsers as P
-from tauron_ebok.exceptions import ApiError, ParseError
-from tauron_ebok.models import Installment, MessageFolder, MessagePage, to_jsonable
+from tauron_api import parsers as P
+from tauron_api.exceptions import ApiError, ParseError
+from tauron_api.models import Installment, MessageFolder, MessagePage, to_jsonable
 
 from .conftest import PAYER, PPE, fixture_json, fixture_text
 

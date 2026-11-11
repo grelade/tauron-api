@@ -2,7 +2,7 @@
 
 Mapped in November 2026 against a live household account (one payer, electricity, G11).
 Unofficial: TAURON can change any of this without notice. Implemented in
-`src/tauron_ebok/client.py` (HTTP) and `src/tauron_ebok/parsers.py` (HTML/JSON parsing).
+`src/tauron_api/client.py` (HTTP) and `src/tauron_api/parsers.py` (HTML/JSON parsing).
 All example values below are fake.
 
 > **Legacy note.** Until autumn 2026 the eBOK lived at `ebok.tauron.pl` (a PHP app with

@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import responses
 
-from tauron_ebok import cli
+from tauron_api import cli
 
 from .conftest import BASE, PAYER, add_html, add_json, fixture_json
 
