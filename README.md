@@ -19,8 +19,10 @@ It logs in with your eBOK credentials and gives typed access to everything the p
 ## Install
 
 ```bash
-uv add git+https://github.com/grelade/tauron-api      # or: pip install git+https://…
+pip install tauron-api        # or: uv add tauron-api
 ```
+
+Latest unreleased code: `pip install git+https://github.com/grelade/tauron-api`.
 
 Requires Python 3.10+.
 
@@ -28,7 +30,7 @@ Requires Python 3.10+.
 
 ```bash
 export TAURON_USER=you@example.com TAURON_PASS='…'     # or put them in ./.env
-uvx --from git+https://github.com/grelade/tauron-api tauron-api balance
+uvx tauron-api balance
 ```
 
 | Command | Output |

@@ -67,6 +67,18 @@ sent (see existing tests).
   `LoadMoreInvoicesProducts`, see `parsers.jquery_params`.
 - Opening a message page marks it as read.
 
+## Releasing
+
+Releases go to PyPI from GitHub Actions (`.github/workflows/release.yml`) via trusted
+publishing; there is no token to manage.
+
+1. Bump the version: `uv version --bump patch` (or `minor` / `major`); this updates `pyproject.toml` and `uv.lock`.
+2. Commit, then tag and push: `git tag v$(uv version --short) && git push && git push --tags`.
+3. The workflow runs CI, checks the tag matches the version, builds and smoke-tests the wheel,
+   publishes to https://pypi.org/project/tauron-api/ and creates a GitHub release with the files attached.
+
+PyPI versions can never be re-uploaded, so a broken release needs a new version number.
+
 ## Safety rules
 
 - **Never commit personal data.** `.env` holds real credentials and is gitignored. Fixtures must
